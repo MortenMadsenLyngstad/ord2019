@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>tdt4100-s2021</groupId>
+	<artifactId>eksamens-ord-2022</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+  	<properties>
+		<skipUiTests>false</skipUiTests>
+	</properties>
+  
+  <dependencies>
+  	<!-- JavaFX FXML -->
+  	<dependency>
+		<groupId>org.openjfx</groupId>
+	  <artifactId>javafx-fxml</artifactId>
+	  <version>17.0.2</version>
+	</dependency>
+
+	<!-- JUnit 5 -->
+	<dependency>
+		<groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-engine</artifactId>
+		<version>5.7.0</version>
+		<scope>test</scope>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+	<dependency>
+	    <groupId>org.mockito</groupId>
+	    <artifactId>mockito-core</artifactId>
+	    <version>4.6.0</version>
+	    <scope>test</scope>
+	</dependency>
+	
+    <!-- Test with TextFX -->
+	<dependency>
+		<groupId>org.testfx</groupId>
+		<artifactId>testfx-core</artifactId>
+		<version>4.0.16-alpha</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.testfx</groupId>
+		<artifactId>testfx-junit5</artifactId>
+		<version>4.0.16-alpha</version>
+		<scope>test</scope>
+    </dependency>
+	
+</dependencies>
+
+<build>
+  <resources>
+  	<resource>
+  	  <directory>${project.basedir}/src/main/java</directory>
+  	</resource>
+  </resources>
+  <plugins>
+	<plugin>
+	  <artifactId>maven-compiler-plugin</artifactId>
+	  <version>3.8.0</version>
+	  <configuration>
+		<release>17</release>
+	  </configuration>
+	</plugin>
+	<plugin>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>3.0.0-M5</version>
+		<configuration>
+            <skipTests>${skipUiTests}</skipTests>
+            <argLine>
+                --add-opens fxml/part5=ALL-UNNAMED
+                --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+            </argLine>
+            <systemPropertyVariables>
+	            <testfx.robot.move_max_count>2</testfx.robot.move_max_count>
+            </systemPropertyVariables>
+		</configuration>
+	</plugin>
+	<plugin>
+		<artifactId>maven-failsafe-plugin</artifactId>
+		<version>3.0.0-M5</version>
+	</plugin>
+  </plugins>
+</build>
+</project>
